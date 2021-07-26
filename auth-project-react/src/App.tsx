@@ -10,57 +10,63 @@ import {
 } from "react-router-dom";
 
 function isAuthorized() {
-    if (false) {
-        return (
-            <div>
-                NotImplemented
+    if(false){
+        return(
+            <div className="App">
+                <nav>
+                    <div>
+                        <Link to="/Home"> Home </Link>
+                    </div>
+                    <div>
+                        <Link to="/logout">Выйти</Link>
+                    </div>
+                </nav>
             </div>
         )
-    } else {
-        return (
-            <div>
-                Hello, stranger!
+    }
+    else{
+        return(
+            <div className="App">
+                <nav>
+                    <div>
+                        <Link to="/Home"> Home </Link>
+                    </div>
+                    <div>
+                        <Link to="/login">Войти</Link>
+                    </div>
+                    <div>
+                    <Link to="/register">Зарегестрироваться</Link>
+                    </div>
+                </nav>
             </div>
         )
     }
 }
 
+
 function App() {
     return (
         <div>
-            <header>
-                <div className="App">
+                <div>
                     <Router>
 
                         <Switch>
-                            <Route path="/login">
-                                <LoginForm/>
-                            </Route>
-                            <Route path="/register">
-                                <RegisterForm/>
-                            </Route>
-                            <Route path="/home">
-                                <div>
+                                <Route path="/login">
+                                    <LoginForm/>
+                                </Route>
+                                <Route path="/register">
+                                    <RegisterForm/>
+                                </Route>
+                                <div className="App">
                                     <nav>
-                                        <div>
-                                            <Link to="/Home"> Home </Link>
-                                        </div>
-                                        <div>
-                                            <Link to="/login">Войти</Link>
-                                        </div>
-                                        <div>
-                                            <Link to="/register">Зарегестрироваться</Link>
-                                        </div>
+                                        {isAuthorized()}
                                     </nav>
                                 </div>
-                            </Route>
                             <Redirect to='/home' from='/'/>
                         </Switch>
                     </Router>
                 </div>
-            </header>
             <div>
-                {isAuthorized()}
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
-
+import './App.css';
 
 export function LoginForm() {
     let [email, setEmail] = useState('');
@@ -27,7 +27,7 @@ export function LoginForm() {
     }
 
     return (
-        <div>
+        <div className="forms">
             <div>
                 <p>
                     <form onSubmit={handleHomeRedirect}>
