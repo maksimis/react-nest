@@ -12,8 +12,8 @@ export class User {
   surname: string;
 
   @Column()
-  Email: string;
+  email: string;
 
   @Column()
-  HashedPassword: string;
+  hashedPassword: string;
 }
