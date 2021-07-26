@@ -15,10 +15,10 @@ function isAuthorized() {
             <div className="App">
                 <nav>
                     <div>
-                        <Link to="/Home"> Home </Link>
+                        <Link to="/Home" className="App-link"> Home </Link>
                     </div>
                     <div>
-                        <Link to="/logout">Выйти</Link>
+                        <Link to="/logout" className="App-link">Выйти</Link>
                     </div>
                 </nav>
             </div>
@@ -29,13 +29,13 @@ function isAuthorized() {
             <div className="App">
                 <nav>
                     <div>
-                        <Link to="/Home"> Home </Link>
+                        <Link to="/Home" className="App-link"> Home </Link>
                     </div>
                     <div>
-                        <Link to="/login">Войти</Link>
+                        <Link to="/login" className="App-link">Войти</Link>
                     </div>
                     <div>
-                    <Link to="/register">Зарегестрироваться</Link>
+                    <Link to="/register" className="App-link">Зарегестрироваться</Link>
                     </div>
                 </nav>
             </div>
