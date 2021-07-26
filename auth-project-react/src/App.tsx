@@ -27,31 +27,41 @@ function isAuthorized() {
 
 function App() {
     return (
-        <div className="App">
-            <Router>
+        <div>
+            <header>
+                <div className="App">
+                    <Router>
 
-                <Switch>
-                    <Route path="/login">
-                        <LoginForm/>
-                    </Route>
-                    <Route path="/register">
-                        <RegisterForm/>
-                    </Route>
-                    <Route path="/home">
-                        <div>
-                            <nav>
-
-                                <p><Link to="/login">Войти</Link></p>
-
-                                <p><Link to="/register">Зарегестрироваться</Link></p>
-
-                            </nav>
-                            {isAuthorized()}
-                        </div>
-                    </Route>
-                    <Redirect to='/home' from='/'/>
-                </Switch>
-            </Router>
+                        <Switch>
+                            <Route path="/login">
+                                <LoginForm/>
+                            </Route>
+                            <Route path="/register">
+                                <RegisterForm/>
+                            </Route>
+                            <Route path="/home">
+                                <div>
+                                    <nav>
+                                        <div>
+                                            <Link to="/Home"> Home </Link>
+                                        </div>
+                                        <div>
+                                            <Link to="/login">Войти</Link>
+                                        </div>
+                                        <div>
+                                            <Link to="/register">Зарегестрироваться</Link>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </Route>
+                            <Redirect to='/home' from='/'/>
+                        </Switch>
+                    </Router>
+                </div>
+            </header>
+            <div>
+                {isAuthorized()}
+            </div>
         </div>
     );
 }
