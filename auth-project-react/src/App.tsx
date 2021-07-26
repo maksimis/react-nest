@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {LoginForm} from "./Login";
+import {RegisterForm} from "./Register";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link, Redirect
+} from "react-router-dom";
+
+function isAuthorized() {
+    if (false) {
+        return (
+            <div>
+                NotImplemented
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                Hello, stranger!
+            </div>
+        )
+    }
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Router>
+
+                <Switch>
+                    <Route path="/login">
+                        <LoginForm/>
+                    </Route>
+                    <Route path="/register">
+                        <RegisterForm/>
+                    </Route>
+                    <Route path="/home">
+                        <div>
+                            <nav>
+
+                                <p><Link to="/login">Войти</Link></p>
+
+                                <p><Link to="/register">Зарегестрироваться</Link></p>
+
+                            </nav>
+                            {isAuthorized()}
+                        </div>
+                    </Route>
+                    <Redirect to='/home' from='/'/>
+                </Switch>
+            </Router>
+        </div>
+    );
 }
 
 export default App;
