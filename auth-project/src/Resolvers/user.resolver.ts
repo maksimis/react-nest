@@ -18,6 +18,7 @@ export class UserResolver{
   }
 
   @Query(returns => [PropertyMetadata])
+  @UseGuards(JwtAuthGuard)
   userProperties() : PropertyMetadata[]{
     return this.userService.getUserProperties();
   }

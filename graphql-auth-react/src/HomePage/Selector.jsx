@@ -64,10 +64,10 @@ export default function MultipleSelect({names, handleChange, selectedNames, ...p
           value={selectedNames}
           onChange={handleChange}
           input={<Input />}
-          renderValue={(selected) => (selected).map(name => (names[name]).join(', '))}
+          renderValue={(selected) => (selected).map(name => (names.get(name))).join(', ')}
           MenuProps={MenuProps}
         >
-          {Object.entries(names).map(([key, value]) => (
+          {Array.from(names.entries()).map(([key, value]) => (
             <MenuItem key={value} value={key}>
               <Checkbox checked={selectedNames.indexOf(key) > -1} />
               <ListItemText primary={value} />

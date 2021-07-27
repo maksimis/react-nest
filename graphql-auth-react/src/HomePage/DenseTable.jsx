@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import {v4 as uuid} from 'uuid';
 import MultipleSelect from './Selector';
 import {gql, useApolloClient} from '@apollo/client';
+import {useGqlMutation, useGqlQuery} from "../ClientHook";
 
 
 const useStyles = makeStyles({
@@ -23,14 +24,14 @@ const useStyles = makeStyles({
 
 export default function DenseTable() {
     const classes = useStyles();
-    let [rowNames, setRowNames] = useState({});
-    let [showRowNames, setShowRowNames] = useState(['']);
+    let [rowNames, setRowNames] = useState(new Map());
+    let [showRowNames, setShowRowNames] = useState([]);
     let [users, setUsers] = useState([]);
 
-    let client = useApolloClient();
+    let client = useGqlQuery();
 
     function changeNames(names) {
-        if (names.length == 0) return;
+        if (names.length === 0) return;
         setShowRowNames(() => {
             updateUsers(names);
             return names;
@@ -38,7 +39,7 @@ export default function DenseTable() {
     }
 
     useEffect(() => {
-        client.query({
+        client({
             query: gql`
                 query GetUserProperties {
                     userProperties{
@@ -46,32 +47,31 @@ export default function DenseTable() {
                         displayName
                     }
                 }
-            `
-        })
-            .then((result) => result.data)
-            .then((data) => {
-                let names = {};
-                for(let property of data.userProperties){
-                    names[property.propertyName] = property.displayName;
+            `,
+            onSuccess: (data) => {
+                let names = new Map();
+                for (let property of data.userProperties) {
+                    names.set(property.propertyName, property.displayName);
                 }
 
                 setRowNames(names);
                 changeNames([]);
-            })
+            }
+        })
+
     }, [])
 
     function updateUsers(names) {
-        if(names.length > 0)
-            client.query({
+        if (names.length > 0)
+            client({
                 query: gql`
-                query {
-                users{
-                    ${names.join(' ')}
-                }
-            }`
+                    query {
+                        users{
+                            ${names.join(' ')}
+                        }
+                    }`,
+                onSuccess: (data) => setUsers(data.users)
             })
-                .then((result) => result.data)
-                .then((data) => setUsers(data.users));
     }
 
     function handleChange(e) {
@@ -86,17 +86,19 @@ export default function DenseTable() {
                 <TableHead>
                     {showRowNames.map((name) => (
                         <TableCell key={uuid()}>
-                            {rowNames[name]}
+                            {rowNames.get(name)}
                         </TableCell>
                     ))}
                 </TableHead>
                 <TableBody>
                     {users.map((user) => (
                         <TableRow key={uuid()}>
-                            {Object.values(user).map((value) => (
+                            {
+                                showRowNames.map((name) => (
                                 <TableCell key={uuid()}>
-                                    {value}
-                                </TableCell>))}
+                                    {user[name]}
+                                </TableCell>))
+                            }
                         </TableRow>
                     ))}
                 </TableBody>

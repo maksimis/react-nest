@@ -14,7 +14,7 @@ export class AuthService {
 
   public async authenticate(loginInput : UserLoginInput) : Promise<string | null>{
     let user = await this.userRepository.findByEmail(loginInput.email);
-    if(user && bcrypt.compare(loginInput.password, user.hashedPassword)){
+    if(user && await bcrypt.compare(loginInput.password, user.hashedPassword)){
       return this.generateToken(user);
     }
 
