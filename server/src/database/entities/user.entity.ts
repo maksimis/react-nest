@@ -1,29 +1,29 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { DisplayName } from "../Infrastructure/display.name.decorator";
-import { PropertyMetadata } from "./property.metadata";
+import { DisplayName } from "../../common/decorators/display.name.decorator";
+import { PropertyMetadata } from "../../common/models/property-metadata";
 
 @ObjectType()
 @Entity()
 export class User {
   public static properties: PropertyMetadata[] = [];
 
-  @DisplayName('Идентификатор')
+  @DisplayName('Id')
   @Field(type => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
-  @DisplayName('Имя')
+  @DisplayName('First name')
   @Field()
   @Column({ length: 500 })
   firstName: string;
 
-  @DisplayName('Фамилия')
+  @DisplayName('Last name')
   @Field()
   @Column('text')
   surname: string;
 
-  @DisplayName('Возраст')
+  @DisplayName('Age')
   @Field(type => Int)
   @Column()
   age: number;
@@ -33,7 +33,7 @@ export class User {
   @Column({unique: true})
   email: string;
 
-  @DisplayName('Номер телефона')
+  @DisplayName('Phone number')
   @Field()
   @Column()
   phoneNumber: string;

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user.module';
+import { UserModule } from './user/user.module';
 import { JwtModule } from "@nestjs/jwt";
-import { jwtConstants } from "./Constants/jwtConstants";
-import { AuthModule } from "./auth.module";
+import { jwtConstants } from "./auth/сonstants/jwtConstants";
+import { AuthModule } from "./auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import * as path from "path";

@@ -1,4 +1,4 @@
-import { PropertyMetadata } from "../Models/property.metadata";
+import { PropertyMetadata } from "../models/property-metadata";
 
 export function DisplayName(name: string) : PropertyDecorator{
   return function(target: any, propertyKey: string){
