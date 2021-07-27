@@ -1,10 +1,10 @@
 import { Query, Resolver } from "@nestjs/graphql";
-import { User } from "../Models/user.entity";
-import { UserService } from "../Services/user.service";
-import { AuthService } from "../Services/auth.service";
+import { User } from "../../database/entities/user.entity";
+import { UserService } from "../services/user.service";
+import { AuthService } from "../../auth/services/auth.service";
 import { UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from "../Infrastructure/Guards/jwt.auth.guard";
-import { PropertyMetadata } from "../Models/property.metadata";
+import { JwtAuthGuard } from "../../auth/guards/jwt.auth.guard";
+import { PropertyMetadata } from "../../common/models/property-metadata";
 
 @Resolver(of => User)
 export class UserResolver{

@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { User } from "../Models/user.entity";
-import { UserRegisterInput } from "../Models/user.register.dto";
-import { AuthService } from "../Services/auth.service";
+import { User } from "../../database/entities/user.entity";
+import { UserRegisterInput } from "../models/user.register.dto";
+import { AuthService } from "../services/auth.service";
 import { UserInputError } from "apollo-server-express";
-import { UserLoginInput } from "../Models/user.login.dto";
+import { UserLoginInput } from "../models/user.login.dto";
 
 @Resolver()
 export class AuthResolver{
