@@ -1,7 +1,7 @@
-import { Field, InputType } from "@nestjs/graphql";
+import { Field, InputType, Int } from "@nestjs/graphql";
 
 @InputType()
-export class UserRegisterDto {
+export class UserRegisterInput {
   @Field()
   email : string;
 
@@ -10,6 +10,12 @@ export class UserRegisterDto {
 
   @Field()
   surname : string;
+
+  @Field(type => Int)
+  age : number;
+
+  @Field()
+  phoneNumber: string;
 
   @Field()
   password :string;

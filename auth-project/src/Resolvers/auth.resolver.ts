@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { User } from "../Models/user.entity";
-import { UserRegisterDto } from "../Models/user.register.dto";
+import { UserRegisterInput } from "../Models/user.register.dto";
 import { AuthService } from "../Services/auth.service";
 import { UserInputError } from "apollo-server-express";
-import { UserLoginDto } from "../Models/user.login.dto";
+import { UserLoginInput } from "../Models/user.login.dto";
 
 @Resolver()
 export class AuthResolver{
@@ -11,7 +11,7 @@ export class AuthResolver{
   }
 
   @Mutation(returns => User)
-  async register(@Args('registerData') registerData: UserRegisterDto){
+  async register(@Args('registerData') registerData: UserRegisterInput){
     let result = await this.authService.register(registerData);
     if(result instanceof Error)
       throw new UserInputError(result.message);
@@ -19,7 +19,7 @@ export class AuthResolver{
   }
 
   @Mutation(returns => String)
-  async login(@Args('loginData') loginData: UserLoginDto){
+  async login(@Args('loginData') loginData: UserLoginInput){
     let result = await this.authService.authenticate(loginData);
     if(result === null)
       throw new UserInputError("Authentication data is incorrect");

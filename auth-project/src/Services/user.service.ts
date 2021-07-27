@@ -20,4 +20,8 @@ export class UserService {
   async create(user): Promise<User> {
     return this.userRepository.save(user);
   }
+
+  public getUserProperties(){
+    return User.properties;
+  }
 }
