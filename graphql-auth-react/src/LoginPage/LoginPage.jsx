@@ -15,6 +15,8 @@ class LoginPage extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+      reg = /"^.+@+\..+$"/;
+
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value });
@@ -30,6 +32,8 @@ class LoginPage extends React.Component {
         }
     }
 
+
+
     render() {
         const { loggingIn } = this.props;
         const { email, password, submitted } = this.state;
@@ -40,15 +44,15 @@ class LoginPage extends React.Component {
                     <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
                         <label htmlFor="email">Email</label>
                         <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
-                        {submitted && !email &&
-                            <div className="help-block">Email is required</div>
+                        {submitted && (!email || !this.reg.test(email)) &&
+                            <div className="help-block">Invalid Email</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-                        {submitted && !password &&
-                            <div className="help-block">Password is required</div>
+                        {submitted && (!password || password.length<6) &&
+                            <div className="help-block">Invalid password</div>
                         }
                     </div>
                     <div className="form-group mt-2">

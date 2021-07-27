@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {isNonEmptyArray} from "@apollo/client/utilities";
 
 class RegisterPage extends React.Component {
     constructor(props) {
@@ -20,6 +21,9 @@ class RegisterPage extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    emailReg = /"^.+@+\..+$"/;
+    phoneReg = /^[0-9\-\+]{9,15}$/
 
     handleChange(event) {
         const { name, value } = event.target;
@@ -66,29 +70,29 @@ class RegisterPage extends React.Component {
                     <div className={'form-group' + (submitted && !user.age ? ' has-error' : '')}>
                         <label htmlFor="username">Age</label>
                         <input type="text" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
-                        {submitted && !user.age &&
-                        <div className="help-block">Age is required</div>
+                        {submitted && (!user.age || isNaN(Number(user.age))) &&
+                        <div className="help-block">Invalid age</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
-                        <label htmlFor="username">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleChange} />
-                        {submitted && !user.email &&
-                            <div className="help-block">Email is required</div>
+                        {submitted && (!user.email || !this.emailReg.test(user.email)) &&
+                            <div className="help-block">Invalid Email</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.phoneNumber ? ' has-error' : '')}>
                         <label htmlFor="username">Phone number</label>
                         <input type="text" className="form-control" name="phoneNumber" value={user.phoneNumber} onChange={this.handleChange} />
-                        {submitted && !user.phoneNumber &&
-                        <div className="help-block">PhoneNumber is required</div>
+                        {submitted && (!user.phoneNumber || !this.phoneReg.test(user.phoneNumber)) &&
+                        <div className="help-block">Invalid phone number</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-                        {submitted && !user.password &&
-                            <div className="help-block">Password is required</div>
+                        {submitted && (!user.password || user.password<6) &&
+                            <div className="help-block">Invalid password</div>
                         }
                     </div>
                     <div className="form-group mt-2">
