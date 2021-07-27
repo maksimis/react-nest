@@ -20,7 +20,7 @@
 .env.production.local
 */**/.idea
 /.idea
-/info-table/dist
+/**/*/dist
 
 
 npm-debug.log*
