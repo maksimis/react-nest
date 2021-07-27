@@ -1,14 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Redirect, useHistory} from "react-router-dom";
+import {Switch, Route, Redirect, useHistory} from "react-router-dom";
 import {HomePage} from "./HomePage/HomePage";
 import GuardedRoute from "./GuardedRoute";
 import {useJwt} from "./AuthHook";
 import {RegisterPage} from "./RegisterPage/RegisterPage";
 import {LoginPage} from "./LoginPage/LoginPage";
 import {useAlert} from "./AlertHook";
-import {useGqlMutation, useGqlQuery} from "./ClientHook";
+import {useGqlMutation} from "./ClientHook";
 import {gql} from "@apollo/client";
 
 function App() {
