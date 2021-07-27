@@ -1,7 +1,8 @@
 import {useContext} from "react";
-import {AuthContext} from "./AuthProvider";
+import {useLocation} from "react-router";
+import {useLocalStorage} from "./LocalStorageHook";
 
 export function useJwt() {
-    let value = useContext(AuthContext);
-    return [value.jwt, value.setJwt];
+    let [jwt, setJwt] = useLocalStorage("jwt", '');
+    return [jwt, setJwt];
 }

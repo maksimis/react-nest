@@ -1,26 +1,41 @@
 import React from 'react';
-import ReactDOM, {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 import {App} from "./App";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     ApolloClient,
     InMemoryCache,
     ApolloProvider,
 } from "@apollo/client";
-import { AuthProvider } from './AuthProvider';
+import {setContext} from 'apollo-link-context';
+import { createHttpLink } from 'apollo-link-http';
+
+const httpLink = createHttpLink({uri: 'http://localhost:3001/graphql'})
+
+const authLink = setContext((operation, previousContext) => {
+    const { headers } = previousContext
+    let jwtToken = window.localStorage.getItem('jwt');
+
+    return {
+        ...previousContext,
+        headers: {
+            ...headers,
+            'Authorization': jwtToken ? `Bearer ${jwtToken}` : ''
+        }
+    }
+});
 
 const client = new ApolloClient({
-    uri: 'http://localhost:3001/graphql',
+    link: authLink.concat(httpLink) as any,
     cache: new InMemoryCache({
         addTypename: false
     })
 });
 
 
-render(
-    <AuthProvider>
+ReactDOM.render(
         <ApolloProvider client={client}>
                 <App />
-        </ApolloProvider>
-    </AuthProvider>,
-    document.getElementById('app')
+        </ApolloProvider>,
+    document.getElementById('root')
 );

@@ -4,16 +4,8 @@ import { Link } from 'react-router-dom';
 import DenseTable from "./DenseTable.jsx";
 
 class HomePage extends React.Component {
-    componentDidMount() {
-        this.props.getUsers();
-    }
-
-    handleDeleteUser(id) {
-        return (e) => this.props.deleteUser(id);
-    }
-
     render() {
-        const { user, users } = this.props;
+        const { user } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h1>Hi {user.firstName}!</h1>
