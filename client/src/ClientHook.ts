@@ -1,5 +1,4 @@
 import {useApolloClient} from "@apollo/client";
-import {useJwt} from "./AuthHook";
 import {useHistory} from "react-router-dom";
 import {useAlert} from "./AlertHook";
 

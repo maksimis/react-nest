@@ -9,8 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {v4 as uuid} from 'uuid';
 import MultipleSelect from './Selector';
-import {gql, useApolloClient} from '@apollo/client';
-import {useGqlMutation, useGqlQuery} from "../ClientHook";
+import {gql} from '@apollo/client';
+import {useGqlQuery} from "../ClientHook";
 
 
 const useStyles = makeStyles({
