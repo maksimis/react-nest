@@ -9,7 +9,7 @@ export class User {
   public static properties: PropertyMetadata[] = [];
 
   @DisplayName('Id')
-  @Field(type => Int)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,7 +24,7 @@ export class User {
   surname: string;
 
   @DisplayName('Age')
-  @Field(type => Int)
+  @Field(() => Int)
   @Column()
   age: number;
 
