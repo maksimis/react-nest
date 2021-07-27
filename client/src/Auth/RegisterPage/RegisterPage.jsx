@@ -37,13 +37,29 @@ class RegisterPage extends React.Component {
 
         this.setState({submitted: true});
         const {user} = this.state;
-        if (user.firstName && user.lastName && user.email && user.password && user.age && user.phoneNumber) {
+        if (user.firstName && user.lastName && this.validateEmail(user.email) && this.validatePassword(user.password) && this.validateAge(user.age) && this.validatePhoneNumber(user.phoneNumber)) {
             this.props.register(user);
         }
     }
 
+    validateAge(age){
+        return (!age || isNaN(Number(age)))
+    }
+
+    validatePhoneNumber(phoneNumber) {
+        (!phoneNumber || this.phoneReg.test(phoneNumber));
+    }
+
+    validatePassword(password){
+        return (!password || password.length<6);
+    }
+
+    validateEmail(email){
+        return (!email || this.emailReg.test(email));
+    }
+
     emailReg = /^.+@.+\..+$/;
-    phoneReg = /^[0-9\-+]{9,15}$/;
+    phoneReg =/^[0-9\-\+]{9,15}$/
 
     render() {
         const {registering, alert} = this.props;
@@ -75,28 +91,28 @@ class RegisterPage extends React.Component {
                                 <div className={'form-group' + (submitted && !user.age ? ' has-error' : '')}>
                                     <label htmlFor="username">Age</label>
                                     <input type="text" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
-                                    {submitted && (!user.age || isNaN(Number(user.age))) &&
+                                    {submitted && !this.validateAge(user.age) &&
                                     <div className="help-block">Invalid age</div>
                                     }
                                 </div>
                                 <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
                                     <label htmlFor="email">Email</label>
                                     <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleChange} />
-                                    {submitted && (!user.email || !this.emailReg.test(user.email)) &&
+                                    {submitted && !this.validateEmail(user.email) &&
                                     <div className="help-block">Invalid Email</div>
                                     }
                                 </div>
                                 <div className={'form-group' + (submitted && !user.phoneNumber ? ' has-error' : '')}>
                                     <label htmlFor="username">Phone number</label>
                                     <input type="text" className="form-control" name="phoneNumber" value={user.phoneNumber} onChange={this.handleChange} />
-                                    {submitted && (!user.phoneNumber || !this.phoneReg.test(user.phoneNumber)) &&
+                                    {submitted && !this.validatePhoneNumber(user.phoneNumber) &&
                                     <div className="help-block">Invalid phone number</div>
                                     }
                                 </div>
                                 <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
                                     <label htmlFor="password">Password</label>
                                     <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-                                    {submitted && (!user.password || user.password<6) &&
+                                    {submitted && !this.validatePassword(this.validatePassword()) &&
                                     <div className="help-block">Invalid password</div>
                                     }
                                 </div>

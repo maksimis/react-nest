@@ -9,7 +9,7 @@ import {
 } from "@apollo/client";
 import {setContext} from 'apollo-link-context';
 import { createHttpLink } from 'apollo-link-http';
-import {AlertProvider} from "./AlertProvider";
+import {AlertProvider} from "./Shared/AlertProvider";
 import {BrowserRouter as Router} from "react-router-dom";
 
 const httpLink = createHttpLink({uri: 'http://localhost:3001/graphql'})

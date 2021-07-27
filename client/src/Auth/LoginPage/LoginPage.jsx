@@ -25,9 +25,17 @@ class LoginPage extends React.Component {
 
         this.setState({ submitted: true });
         const { email, password } = this.state;
-        if (email && password) {
+        if (this.validateEmail(email) && this.validatePassword(password)) {
             this.props.loginer(email, password);
         }
+    }
+
+    validatePassword(password){
+        return (!password || password.length<6);
+    }
+
+    validateEmail(email){
+        return (!email || this.reg.test(email));
     }
 
     reg = /^.+@.+\..+$/;
@@ -48,14 +56,14 @@ class LoginPage extends React.Component {
                                 <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
                                     <label htmlFor="email">Email</label>
                                     <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
-                                    {submitted && (!email || !this.reg.test(email)) &&
+                                    {submitted && !this.validateEmail(email) &&
                                     <div className="help-block">Invalid Email</div>
                                     }
                                 </div>
                                 <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                                     <label htmlFor="password">Password</label>
                                     <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-                                    {submitted && (!password || password.length<6) &&
+                                    {submitted && !this.validatePassword(password) &&
                                     <div className="help-block">Invalid password</div>
                                     }
                                 </div>

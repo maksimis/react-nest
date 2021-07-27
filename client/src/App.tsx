@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import {Switch, Route, Redirect, useHistory} from "react-router-dom";
 import {HomePage} from "./HomePage/HomePage";
-import GuardedRoute from "./GuardedRoute";
-import {useJwt} from "./AuthHook";
-import {RegisterPage} from "./RegisterPage/RegisterPage";
-import {LoginPage} from "./LoginPage/LoginPage";
-import {useAlert} from "./AlertHook";
-import {useGqlMutation} from "./ClientHook";
+import GuardedRoute from "./Auth/GuardedRoute";
+import {useJwt} from "./Auth/AuthHook";
+import {RegisterPage} from "./Auth/RegisterPage/RegisterPage";
+import {LoginPage} from "./Auth/LoginPage/LoginPage";
+import {useAlert} from "./Shared/AlertHook";
+import {useGqlMutation} from "./Shared/ClientHook";
 import {gql} from "@apollo/client";
 
 function App() {

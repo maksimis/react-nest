@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import {v4 as uuid} from 'uuid';
 import MultipleSelect from './Selector';
 import {gql} from '@apollo/client';
-import {useGqlQuery} from "../ClientHook";
+import {useGqlQuery} from "../Shared/ClientHook";
 
 
 const useStyles = makeStyles({
@@ -53,9 +53,9 @@ export default function DenseTable() {
                     }
                 }
             `,
-            onSuccess: (data) => {
+            onSuccess: ({userProperties}) => {
                 let names = new Map();
-                for (let property of data.userProperties) {
+                for (let property of userProperties) {
                     names.set(property.propertyName, property.displayName);
                 }
 
@@ -75,7 +75,7 @@ export default function DenseTable() {
                             ${names.join(' ')}
                         }
                     }`,
-                onSuccess: (data) => setUsers(data.users)
+                onSuccess: ({users: newUsers}) => setUsers(newUsers)
             })
     }
 
