@@ -47,7 +47,7 @@ class RegisterPage extends React.Component {
     }
 
     validatePhoneNumber(phoneNumber) {
-        return (phoneNumber && this.phoneReg.test(phoneNumber));
+        return (phoneNumber && !isNaN(Number(phoneNumber)));
     }
 
     validatePassword(password){
