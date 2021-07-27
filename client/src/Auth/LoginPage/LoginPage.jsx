@@ -31,11 +31,11 @@ class LoginPage extends React.Component {
     }
 
     validatePassword(password){
-        return (!password || password.length<6);
+        return (password && password.length>6);
     }
 
     validateEmail(email){
-        return (!email || this.reg.test(email));
+        return (email && this.reg.test(email));
     }
 
     reg = /^.+@.+\..+$/;

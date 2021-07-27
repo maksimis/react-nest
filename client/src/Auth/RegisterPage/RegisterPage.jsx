@@ -43,19 +43,19 @@ class RegisterPage extends React.Component {
     }
 
     validateAge(age){
-        return (!age || isNaN(Number(age)))
+        return (age && !isNaN(Number(age)))
     }
 
     validatePhoneNumber(phoneNumber) {
-        (!phoneNumber || this.phoneReg.test(phoneNumber));
+        return (phoneNumber && this.phoneReg.test(phoneNumber));
     }
 
     validatePassword(password){
-        return (!password || password.length<6);
+        return (password && password.length>6);
     }
 
     validateEmail(email){
-        return (!email || this.emailReg.test(email));
+        return (email && this.emailReg.test(email));
     }
 
     emailReg = /^.+@.+\..+$/;
