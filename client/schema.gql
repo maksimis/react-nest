@@ -1,0 +1,41 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PropertyMetadata {
+  propertyName: String!
+  displayName: String!
+}
+
+type User {
+  id: Int!
+  firstName: String!
+  surname: String!
+  age: Int!
+  email: String!
+  phoneNumber: String!
+}
+
+type Query {
+  users: [User!]!
+  userProperties: [PropertyMetadata!]!
+}
+
+type Mutation {
+  register(registerData: UserRegisterInput!): User!
+  login(loginData: UserLoginInput!): String!
+}
+
+input UserRegisterInput {
+  email: String!
+  firstName: String!
+  surname: String!
+  age: Int!
+  phoneNumber: String!
+  password: String!
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+}
